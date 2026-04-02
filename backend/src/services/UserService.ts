@@ -80,6 +80,16 @@ export class UserService {
     token: string,
     email: string,
   ): Promise<{ message: string }> {
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      throw new AppError(HTTP_STATUS.NOT_FOUND, ERROR_MESSAGES.UNAUTHORIZED);
+    }
+
+    // Idempotent behavior: repeated verification requests should be harmless.
+    if (user.isEmailVerified) {
+      return { message: SUCCESS_MESSAGES.EMAIL_VERIFIED };
+    }
+
     const hashedToken = hashToken(token);
     const tokenData = verificationTokens.get(hashedToken);
 
@@ -93,11 +103,6 @@ export class UserService {
     }
 
     // Update user
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-      throw new AppError(HTTP_STATUS.NOT_FOUND, ERROR_MESSAGES.UNAUTHORIZED);
-    }
-
     user.isEmailVerified = true;
     await user.save();
 

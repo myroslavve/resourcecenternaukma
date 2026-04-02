@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import type { User, LoginDTO, CreateUserDTO } from '../types';
@@ -6,6 +6,7 @@ import type { User, LoginDTO, CreateUserDTO } from '../types';
 interface AuthContextType {
   user: User | null;
   loading: boolean;
+  initialized: boolean;
   error: string | null;
   login: (email: string, password: string) => Promise<any>;
   logout: () => Promise<void>;
@@ -22,6 +23,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const auth = useAuth();
+  const [initialized, setInitialized] = useState(false);
 
   const login = (email: string, password: string) => {
     const dto: LoginDTO = { email, password };
@@ -40,9 +42,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Check if user is already logged in
-    auth.getCurrentUser().catch(() => {
-      // User not logged in
-    });
+    auth
+      .getCurrentUser()
+      .catch(() => {
+        // User not logged in
+      })
+      .finally(() => {
+        setInitialized(true);
+      });
   }, []);
 
   return (
@@ -50,6 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       value={{
         user: auth.user,
         loading: auth.loading,
+        initialized,
         error: auth.error,
         login,
         logout: auth.logout,

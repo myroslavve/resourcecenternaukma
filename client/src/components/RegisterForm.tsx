@@ -14,8 +14,6 @@ export function RegisterForm() {
     confirmPassword: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [success, setSuccess] = useState(false);
-  const [registeredEmail, setRegisteredEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateForm = () => {
@@ -60,37 +58,13 @@ export function RegisterForm() {
         formData.firstName,
         formData.lastName,
       );
-      setRegisteredEmail(formData.email);
-      setSuccess(true);
+      navigate(`/check-email?email=${encodeURIComponent(formData.email)}`);
     } catch (error) {
       console.error('Registration failed:', error);
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  if (success) {
-    return (
-      <div className='space-y-4'>
-        <Alert type='success'>
-          Реєстрація успішна. Ми надіслали лист підтвердження на адресу{' '}
-          <strong>{registeredEmail}</strong>.
-        </Alert>
-        <Alert type='info'>
-          Перед входом потрібно підтвердити email. Відкрийте лист і перейдіть за
-          посиланням підтвердження.
-        </Alert>
-        <Button
-          type='button'
-          variant='primary'
-          className='w-full'
-          onClick={() => navigate('/login')}
-        >
-          Перейти до входу
-        </Button>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} className='space-y-4'>

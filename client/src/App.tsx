@@ -9,6 +9,7 @@ import { AuthProvider, useAuthContext } from './hooks/AuthContext';
 import { HomePage } from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { CheckEmailPage } from './pages/CheckEmailPage';
 import { VerifyEmailPage } from './pages/VerifyEmailPage';
 import { CatalogPage } from './pages/CatalogPage';
 import { AdminBooksPage } from './pages/AdminBooksPage';
@@ -39,9 +40,9 @@ function AdminOnlyRoute({
 }
 
 function AppRoutes() {
-  const { user, loading } = useAuthContext();
+  const { user, initialized } = useAuthContext();
 
-  if (loading) {
+  if (!initialized) {
     return (
       <div className='min-h-screen flex items-center justify-center'>
         <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600'></div>
@@ -82,6 +83,7 @@ function AppRoutes() {
           )
         }
       />
+      <Route path='/check-email' element={<CheckEmailPage />} />
       <Route path='/verify-email' element={<VerifyEmailPage />} />
 
       <Route
