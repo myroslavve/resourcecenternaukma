@@ -28,6 +28,7 @@ const emptyBookForm: CreateBookDTO = {
   description: '',
   totalCopies: 1,
   imageUrl: '',
+  downloadUrl: '',
 };
 export function AdminBooksPage() {
   const {
@@ -144,6 +145,7 @@ export function AdminBooksPage() {
       totalCopies: book.totalCopies,
       publishedYear: book.publishedYear,
       imageUrl: book.imageUrl || '',
+      downloadUrl: book.downloadUrl || '',
     });
     setLocalError(null);
     setIsFormModalOpen(true);
@@ -323,6 +325,12 @@ export function AdminBooksPage() {
             value={form.imageUrl || ''}
             onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
             placeholder='https://example.com/book-cover.jpg'
+          />
+          <Input
+            label='URL завантаження'
+            value={form.downloadUrl || ''}
+            onChange={(e) => setForm({ ...form, downloadUrl: e.target.value })}
+            placeholder='https://example.com/book.pdf'
           />
           <div className='md:col-span-2 flex gap-3'>
             <Button type='submit'>{editingId ? 'Оновити' : 'Створити'}</Button>

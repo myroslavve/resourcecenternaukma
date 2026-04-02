@@ -77,11 +77,12 @@ export const graphqlSchema = buildSchema(`
     author: String!
     isbn: String!
     description: String
+    imageUrl: String
+    downloadUrl: String
     category: String!
     genre: String!
     publishedYear: Int
     totalCopies: Int!
-    availableCopies: Int!
     isActive: Boolean!
     createdAt: String
     updatedAt: String
@@ -118,6 +119,8 @@ export const graphqlSchema = buildSchema(`
     author: String!
     isbn: String!
     description: String
+    imageUrl: String
+    downloadUrl: String
     category: String!
     genre: String!
     publishedYear: Int
@@ -129,11 +132,12 @@ export const graphqlSchema = buildSchema(`
     author: String
     isbn: String
     description: String
+    imageUrl: String
+    downloadUrl: String
     category: String
     genre: String
     publishedYear: Int
     totalCopies: Int
-    availableCopies: Int
     isActive: Boolean
   }
 

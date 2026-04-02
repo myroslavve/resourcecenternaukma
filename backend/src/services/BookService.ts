@@ -48,7 +48,6 @@ export class BookService {
     const book = new BookModel({
       ...dto,
       category: categoryName,
-      availableCopies: dto.totalCopies,
       isActive: true,
     });
 

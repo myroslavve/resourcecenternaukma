@@ -12,14 +12,9 @@ async function startGraphqlServer() {
 
     graphqlApp.listen(PORT, () => {
       console.log(`
-╔════════════════════════════════════════════════════════════════╗
-║                  LIBRARY RESOURCE CENTER                      ║
-║                     GraphQL Server Running                    ║
-╠════════════════════════════════════════════════════════════════╣
-║ Server: http://localhost:${PORT}                             ║
-║ GraphQL: http://localhost:${PORT}/api/graphql                ║
-║ Environment: ${config.nodeEnv}                                          ║
-╚════════════════════════════════════════════════════════════════╝
+Server: http://localhost:${PORT}                             
+GraphQL: http://localhost:${PORT}/api/graphql                
+Environment: ${config.nodeEnv}
       `);
     });
   } catch (error) {

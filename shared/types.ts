@@ -28,11 +28,11 @@ export interface Book {
   isbn: string;
   description?: string;
   imageUrl?: string;
+  downloadUrl?: string;
   category: string;
   genre: string;
   publishedYear?: number;
   totalCopies: number;
-  availableCopies: number;
   isActive: boolean;
   createdAt?: Date;
   updatedAt?: Date;
@@ -89,6 +89,7 @@ export interface CreateBookDTO {
   isbn: string;
   description?: string;
   imageUrl?: string;
+  downloadUrl?: string;
   category: string;
   genre: string;
   publishedYear?: number;
@@ -101,11 +102,11 @@ export interface UpdateBookDTO {
   isbn?: string;
   description?: string;
   imageUrl?: string;
+  downloadUrl?: string;
   category?: string;
   genre?: string;
   publishedYear?: number;
   totalCopies?: number;
-  availableCopies?: number;
   isActive?: boolean;
 }
 

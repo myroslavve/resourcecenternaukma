@@ -35,6 +35,7 @@ export const createBookSchema = z.object({
     .regex(/^[0-9\-]{10,17}$/),
   description: z.string().trim().max(1000).optional(),
   imageUrl: z.string().trim().max(500).optional(),
+  downloadUrl: z.string().trim().max(500).optional(),
   category: z.string().trim(),
   genre: z.string().trim(),
   publishedYear: z
@@ -56,6 +57,7 @@ export const updateBookSchema = z.object({
     .optional(),
   description: z.string().trim().max(1000).optional(),
   imageUrl: z.string().trim().max(500).optional(),
+  downloadUrl: z.string().trim().max(500).optional(),
   category: z.string().trim().optional(),
   genre: z.string().trim().optional(),
   publishedYear: z
@@ -65,7 +67,6 @@ export const updateBookSchema = z.object({
     .max(new Date().getFullYear())
     .optional(),
   totalCopies: z.number().int().min(1).optional(),
-  availableCopies: z.number().int().min(0).optional(),
   isActive: z.boolean().optional(),
 });
 

@@ -129,9 +129,20 @@ export function CatalogPage() {
                 </p>
                 <p className='text-sm text-gray-600'>Жанр: {book.genre}</p>
                 <p className='text-sm text-gray-600'>ISBN: {book.isbn}</p>
-                <p className='text-sm text-gray-600'>
-                  Доступно: {book.availableCopies} / {book.totalCopies}
-                </p>
+                {book.downloadUrl ? (
+                  <a
+                    href={book.downloadUrl}
+                    target='_blank'
+                    rel='noreferrer'
+                    className='inline-block text-sm font-medium text-blue-600 hover:text-blue-700 hover:underline pt-1'
+                  >
+                    Завантажити книгу
+                  </a>
+                ) : (
+                  <p className='text-sm text-gray-500 pt-1'>
+                    Посилання для завантаження відсутнє
+                  </p>
+                )}
                 {book.description && (
                   <p className='text-sm text-gray-600 pt-1'>
                     {book.description}

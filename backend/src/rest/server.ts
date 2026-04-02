@@ -12,14 +12,10 @@ async function startRestServer() {
 
     restApp.listen(PORT, () => {
       console.log(`
-╔════════════════════════════════════════════════════════════════╗
-║                  LIBRARY RESOURCE CENTER                      ║
-║                      REST Server Running                      ║
-╠════════════════════════════════════════════════════════════════╣
-║ Server: http://localhost:${PORT}                             ║
-║ Health: http://localhost:${PORT}/api/health                  ║
-║ Environment: ${config.nodeEnv}                                          ║
-╚════════════════════════════════════════════════════════════════╝
+Server: http://localhost:${PORT}                            
+Health: http://localhost:${PORT}/api/health                 
+Environment: ${config.nodeEnv}                                          
+
       `);
     });
   } catch (error) {

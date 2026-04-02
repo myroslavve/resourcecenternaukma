@@ -52,10 +52,10 @@ const bookSchema = new Schema<Book>(
       required: true,
       min: 1,
     },
-    availableCopies: {
-      type: Number,
-      required: true,
-      min: 0,
+    downloadUrl: {
+      type: String,
+      trim: true,
+      default: '',
     },
     isActive: {
       type: Boolean,
